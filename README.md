@@ -19,6 +19,8 @@ cp .env.example .env.local
 
 # Run development server
 npm run dev
+```
+
 Open http://localhost:3000 in your browser.
 📋 Prerequisites
 
@@ -27,23 +29,29 @@ OpenAI API key (for AI analysis)
 Vercel account (for deployment)
 
 ⚙️ Environment Setup
-Create a .env.local file in the root directory:
-env# OpenAI Configuration
+Create a ```.env.local``` file in the root directory:
+
+```
+# OpenAI Configuration
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-4-turbo-preview
 
 # Optional: Rate limiting
 RATE_LIMIT_MAX_REQUESTS=10
 RATE_LIMIT_WINDOW_MS=60000
+```
+
 Getting OpenAI API Key
 
 Visit platform.openai.com/api-keys
 Create a new API key
 Add billing information (pay-per-use pricing)
-Copy the key to your .env.local file
+Copy the key to your ```.env.local``` file
 
 Cost Estimate: ~$0.01-0.05 per transcript analysis
 🏗️ Project Structure
+
+```
 video-summarizer/
 ├── components/
 │   ├── ui/                 # Shadcn/ui components
@@ -58,10 +66,12 @@ video-summarizer/
 │   └── index.js           # Main page
 ├── public/                # Static assets
 └── styles/               # Global styles
+```
+
 🔧 Core Features
 Transcript Analysis Pipeline
 
-File Upload: Accepts .txt transcript files
+File Upload: Accepts ```.txt``` transcript files
 Content Extraction: Parses speakers, topics, and key phrases
 AI Analysis: Uses OpenAI to generate structured summaries
 Output Formatting: Creates organized takeaways and insights
@@ -75,16 +85,17 @@ Content Categorization: Organizes insights by theme
 
 🚀 Deployment
 Deploy to Vercel
-
 Connect to Vercel:
-bashnpm install -g vercel
+
+```
+npm install -g vercel
 vercel login
 vercel
-
+```
 Set Environment Variables:
 
 Go to Vercel Dashboard → Project → Settings → Environment Variables
-Add your OPENAI_API_KEY
+Add your ```OPENAI_API_KEY```
 
 
 Custom Domain (optional):
@@ -103,38 +114,48 @@ DigitalOcean App Platform: Use the Next.js preset
 
 🔨 Development
 Available Scripts
-bashnpm run dev          # Start development server
+```
+Available Scripts
+npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
 npm run type-check   # Run TypeScript checks
+```
+
 Adding New Analysis Features
 
-Extend the analyzer in lib/transcript-analyzer.js:
-javascriptconst customPattern = /your-regex-pattern/gi;
+Extend the analyzer in ```lib/transcript-analyzer.js```:
+```
+const customPattern = /your-regex-pattern/gi;
 // Add to extractTakeaways() function
+```
 
-Modify the prompt in lib/openai.js:
-javascriptconst systemPrompt = `
+Modify the prompt in ```lib/openai.js```:
+```
+const systemPrompt = `
 Your existing prompt...
 Additional instructions for new feature...
 `;
-
-Update the UI in components/summarizer/ to display new insights
+```
+Update the UI in ```components/summarizer/``` to display new insights
 
 Customizing the UI
 
 Styling: Uses Tailwind CSS classes
 Components: Built with Shadcn/ui components
-Theme: Modify colors in tailwind.config.js
+Theme: Modify colors in ```tailwind.config.js```
 
 🛡️ Rate Limiting & Security
 The app includes basic rate limiting:
-javascript// pages/api/analyze.js
+
+```
+// pages/api/analyze.js
 const rateLimit = {
   max: process.env.RATE_LIMIT_MAX_REQUESTS || 10,
   windowMs: process.env.RATE_LIMIT_WINDOW_MS || 60000
 };
+```
 Production Recommendations:
 
 Implement user authentication
@@ -145,12 +166,15 @@ Configure CORS properly
 🐛 Troubleshooting
 Common Issues
 OpenAI API Errors:
-bashError: 401 Unauthorized
-
+```
+Error: 401 Unauthorized
+```
 Check your API key is valid and has billing enabled
 
 Build Failures:
-bashModule not found: '@/components/ui/...'
+```
+Module not found: '@/components/ui/...'
+```
 
 Ensure all Shadcn/ui components are properly installed
 
@@ -161,8 +185,10 @@ Consider caching results for identical transcripts
 
 Debug Mode
 Enable detailed logging:
-envDEBUG=true
+```
+DEBUG=true
 LOG_LEVEL=debug
+```
 🤝 Contributing
 
 Fork the repository
@@ -178,13 +204,10 @@ Add tests for new features
 Update documentation for API changes
 Ensure environment variables are documented
 
-📄 License
-MIT License - see LICENSE file for details.
 🆘 Support
 
 Issues: GitHub Issues
 Questions: daniel@thedscs.com
 Documentation: Wiki
-
 
 Built by Daniel Sharp | DSCS
