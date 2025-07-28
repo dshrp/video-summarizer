@@ -10,6 +10,7 @@ import { DonationSection } from "@/components/donation-section"
 import { FeatureCard } from "@/components/feature-card"
 import Head from "next/head"
 import { MoreFromMomentum } from "@/components/more-from-momentum"
+import { trackFileUpload, trackSummaryGenerated } from "@/components/analytics"
 
 interface SummaryResult {
   takeaways: string[]
@@ -55,6 +56,9 @@ export default function PodcastSummarizer() {
 
     setFile(selectedFile)
 
+    // Track file upload
+    trackFileUpload(fileExt, selectedFile.size)
+
     try {
       const text = await selectedFile.text()
       if (!text || text.trim().length < 50) {
@@ -96,6 +100,8 @@ export default function PodcastSummarizer() {
       console.log("Summary generated successfully")
       setSummary(result)
       setRetryCount(0)
+
+      trackSummaryGenerated(true)
     } catch (err: any) {
       console.error("Summary error:", err)
       setRetryCount((prev) => prev + 1)
@@ -113,6 +119,7 @@ export default function PodcastSummarizer() {
       }
 
       setError(errorMessage)
+      trackSummaryGenerated(false)
     } finally {
       setLoading(false)
     }

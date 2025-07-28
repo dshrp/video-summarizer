@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { trackDonationClick } from "./analytics"
 
 const PRESET_AMOUNTS = [5, 10, 25]
 
@@ -31,6 +32,9 @@ export function DonationSection() {
   const handleDonate = async () => {
     const amount = getCurrentAmount()
     if (amount < 1) return
+
+    // Track donation attempt
+    trackDonationClick(amount)
 
     setLoading(true)
     try {
